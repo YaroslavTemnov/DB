@@ -1,0 +1,90 @@
+Task 1.1
+Relation A:
+1) Superkeys:
+1.EmpID
+2.SSN
+3.Email
+4.Phone
+5.(SSN, Name)
+6.(Name, Email, Phone)
+2) Candidate keys:
+1.EmpID
+2.SSN
+3.Email
+4.Phone
+3) Primary key:
+EmpID, because is unmutual, not a sensitive data, unique for every person and make the row unique.
+4) In the sample all employees has different phone numbers. So, two employees can not have ssame phone number
+Relation B:
+1) StudentID, CourseCode, Semester
+2) 
+1.STudentID is necessary because it accurate identitify the student, who is on registration.
+2.CourseCode is necessary because it accurate identitify the course
+3.Semester is necessary because the student can register on same course in different semesters
+3) Grade 
+Task 1.2
+1. Student is connected with Proffesor by AdvisorID and ProfID
+2. Proffesor is connected with Department by DepartmentCode and DeptCode
+3. Course is connected with Department by DepartmentCode and DeptCode
+4. Enrollment is connected with Student by StudentID and with Course by CourseID
+Task 2.1
+1,2)
+Patients - table, strong; attributes: Patient_ID(Key, Primary Key), name(simple), birthdate(simple), adress(composite), phone_number(multivalued), office_location(simple)
+Doctors - table, strong; attribues: Doctor_ID(key, Primary Key), name(simple), specializations(multivalued), phone_number(simple), office_location(simple)
+Departments - table, strong; attributes: Department_Code(Key, Primary Key), name(simple), location(simple)
+Appointments - table, strong; attributes: Appointment_ID(Key, Primary Key), Patient(KEy, Foreign Key), Doctor(Key, Foreign Key), date/time(simple or composite), purpose(simple)
+Prescriptions - table, strong; attributes: Prescription_ID(Key, Primary_Key), Doctor(Key, Foreign Key), Patient(Key, Foreign Key),medication(simple), dosage(simple), instruction(simple)
+Hospital Rooms - table weak (depends on Departments); attribures: Department(Key, Foreign_Key, Primary Key), Room (simple)
+3)
+Relations:
+1. Patients - Doctors (M:N)
+2. Departments - Doctors (1:N)
+3. Departments - Hospital Rooms (1:N)
+4. Doctors - Hospital Rooms (1:1)
+5. Appointments - Prescriptions  (1:N)
+Task 4.1
+1)
+1. StudentID -> StudentName, StudentMajor, Role
+2. ProjectID -> ProjectTitle, ProjectType, StartDate, EndDate, HoursWorked
+3. SupervisorId -> SupevisorName, SupervisorDepartment
+2)
+1. Data of student is duplicating every time when students starts a new project
+2. Data of supervisor is duplicating for every student working with the project
+Insert anomaly: cannot to insert a new student while he/she not started a project
+Update anomaly: if supervisor change name or department is needed to change this data in all tables, otherwise the tablee will have multiple truth
+Delete anomaly: if the student finish the work of the project it will causes deleting all information about the project
+3)
+All atrubutes are atomic so there is no 1NF violation
+4)
+Primary Key: (StudentId, ProjectId)
+Partial dependences:
+1. StudentID -> StudentName, StudentMajor
+2. ProjectID -> ProjectTitle, ProjectType, SupervisorID, SupervisorName, SupervisorDept
+2NF:
+Student(StudentID, StudentName, Student Major)
+Project(ProjectTitle, ProjectType, SupervisorID, SupervisorName, SupervisorDept)
+Sudentsproject(StudentId, ProjectID, Role, HoursWorked, StartDate, EndDate)
+5)
+Student(StudentID, StudentName, Student Major)
+Project(ProjectTitle, ProjectType, SupervisorID)
+Supervisor(SupervisorID, SupervisorName, SupervisorDept)
+Sudentsproject(StudentId FK -> StudentName, ProjectID FK -> ProjectTitle, Role, HoursWorked, StartDate, EndDate)
+Task 4.2
+1)
+Primary Key: (StudentID, CourseID, InstructorID)
+2)
+1. StudentID -> StudentMajor
+2. CourseId -> CourseName
+3. InstructorID -> InstructorName
+4. Room -> Building
+5. (CourseID, InstructorID) -> TimeSlot, Room, Building
+6. (TimeSlot, Room) -> CourseID, IntructorID
+3,4)
+Not in BCNF
+1. Student(StudentID, StudentMajor)
+2. Course(CourseID, CourseName)
+3. Instructor(InstructorID, InstructorName)
+4. Place(Building, Room)
+5. Schedule(Course FK -> CourseID, Instructor FK -> InstructorID, Student Fk -> StudentID, TimeSlot, Building, Room)
+5)
+No information loss, all information is saved
